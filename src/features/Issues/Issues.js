@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import './Issues.scss';
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux';
-import { getIssues, filterIssues } from './actions';
+import React, { Component } from "react";
+import "./Issues.scss";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getIssues, filterIssues } from "./actions";
 import Icon from "../Icon/Icon";
 
 const maxLength = 50;
@@ -87,12 +87,31 @@ class Issues extends Component {
           <h4 className="App-url">
             <a href={githubUrl(owner, repo)}>{githubUrl(owner, repo)}</a>
           </h4>
+          <button id="return-button">
+            <Link to="/">Go back</Link>
+          </button>
         </header>
+
         <div className="issues-filters">
           <ul>
-            <li onClick={() => this.handleFilter("all")} className={filter === "all" ? "selected" : ""}>All issues</li>
-            <li onClick={() => this.handleFilter("open")} className={filter === "open" ? "selected" : ""}>Open issues</li>
-            <li onClick={() => this.handleFilter("closed")} className={filter === "closed" ? "selected" : ""}>Closed issues</li>
+            <li
+              onClick={() => this.handleFilter("all")}
+              className={filter === "all" ? "selected" : ""}
+            >
+              All issues
+            </li>
+            <li
+              onClick={() => this.handleFilter("open")}
+              className={filter === "open" ? "selected" : ""}
+            >
+              Open issues
+            </li>
+            <li
+              onClick={() => this.handleFilter("closed")}
+              className={filter === "closed" ? "selected" : ""}
+            >
+              Closed issues
+            </li>
           </ul>
         </div>
         <div className="issues-container">
