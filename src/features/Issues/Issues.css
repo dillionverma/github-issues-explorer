@@ -63,25 +63,23 @@
   padding: 0 3%;
 }
 /* Smaller Screens : Only 1 card on the width */
-@media screen and (min-width: 320px){
-  .issues-container .card {
-    display: block;
-    flex: 1 1 100%;
-    margin: 0 30px 30px 30px;
-    transition:0.3s;
-    box-shadow:#e9e9e9 0px 5px 5px 0px;
+.issues-container .card {
+  display: block;
+  flex: 1 1 100%;
+  margin: 0 1.56% 1.56% 1.56%;
+  transition:0.3s;
+  box-shadow:#e9e9e9 0px 5px 5px 0px;
 
-    /* Ensures 1 card on screen width */
-    max-width: 100%;
-  }
+  /* Ensures 1 card on screen width */
+  max-width: 100%;
 }
 
-/* Ipad landscape : Only 2 card on the screen width */
+/* Medium Screens:  Only 2 card on the screen width */
 @media screen and (min-width: 766px){
   .issues-container .card {
     display: block;
     flex: 1 1 300px;
-    margin: 0 30px 30px 30px;
+    margin: 0 1.56% 1.56% 1.56%;
     transition:0.3s;
     box-shadow:#e9e9e9 0px 5px 5px 0px;
 
@@ -91,11 +89,11 @@
 }
 
 /* Desktops and Larger screens : Only 3 card on the screen width*/
-@media screen and (min-width: 1202px){
+@media screen and (min-width: 1057px){
   .issues-container .card {
     display: block;
     flex: 1 1 28%;
-    margin: 0 30px 30px 30px;
+    margin: 0 1.56% 1.56% 1.56%;
     transition:0.3s;
     box-shadow:#e9e9e9 0px 5px 5px 0px;
     
