@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/features/Issues/Issues.jsx
 import React, { Component } from 'react';
 import './Issues.scss';
 import { Link } from 'react-router-dom';
@@ -9,9 +10,22 @@ const maxLength = 50;
 const Card = ({
   title, body, labels, issueUrl, owner, repo, number,
 }) => (
+=======
+import React, { Component } from "react";
+import "./Issues.scss";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getIssues, filterIssues } from "./actions";
+import Icon from "./components/Icon/Icon";
+
+const maxLength = 50;
+
+const Card = ({ title, body, labels, issueUrl, owner, repo, number, state,  pull_request }) => (
+>>>>>>> 673d01ef19189d144ae278beff9c6867ab86282c:src/features/Issues/Issues.js
   <div className="card" onClick={() => issueUrl(owner, repo, number)}>
     <div className="card-title">
-      <h4>{title}</h4>
+		<Icon state={state} pull={pull_request} />
+        <h4 className={"card-title-text"}>{title}</h4>
     </div>
     <div className="card-body">
       <div>
@@ -89,12 +103,37 @@ class Issues extends Component {
           <h4 className="App-url">
             <a href={githubUrl(owner, repo)}>{githubUrl(owner, repo)}</a>
           </h4>
+          <button id="return-button">
+            <Link to="/">Go back</Link>
+          </button>
         </header>
+
         <div className="issues-filters">
           <ul>
-            <li onClick={() => this.handleFilter('all')} className={filter === 'all' ? 'selected' : ''}>All issues</li>
-            <li onClick={() => this.handleFilter('open')} className={filter === 'open' ? 'selected' : ''}>Open issues</li>
-            <li onClick={() => this.handleFilter('closed')} className={filter === 'closed' ? 'selected' : ''}>Closed issues</li>
+            <li
+              onClick={() => this.handleFilter("all")}
+              className={filter === "all" ? "selected" : ""}
+            >
+              All issues
+            </li>
+            <li
+              onClick={() => this.handleFilter("open")}
+              className={filter === "open" ? "selected" : ""}
+            >
+              Open issues
+            </li>
+            <li
+              onClick={() => this.handleFilter("closed")}
+              className={filter === "closed" ? "selected" : ""}
+            >
+              Closed issues
+            </li>
+            <li
+              onClick={() => this.handleFilter("pull_request")}
+              className={filter === "pull_request" ? "selected" : ""}
+            >
+              Pull Requests
+            </li>
           </ul>
         </div>
         <div className="issues-container">
@@ -108,6 +147,8 @@ class Issues extends Component {
               owner={owner}
               repo={repo}
               number={issue.number}
+              state={issue.state}
+              pull_request={issue.pull_request}
             />
           ))}
         </div>

@@ -41,14 +41,30 @@ export default function reducer(state = INITIAL_STATE, action) {
         filterBy: action.payload.by,
         filteredIssues: state.issues,
       };
-    }
-    return {
-      ...state,
-      filterBy: action.payload.by,
-      filteredIssues: Object.values(state.issues).filter(issue => issue.state === by),
-    };
-
-  default:
-    return state;
+    case GET_ISSUES_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        fetched: false,
+        isLoading: false
+      };
+    case FILTER_ISSUES:
+      let by = action.payload.by;
+      if (by === "all") {
+        return {
+          ...state,
+          filterBy: action.payload.by,
+          filteredIssues: state.issues
+        }
+      } else {
+        return {
+          ...state,
+          filterBy: action.payload.by,
+          filteredIssues: Object.values(state.issues)
+            .filter(issue => issue.state === by || !!issue.pull_request)
+        }
+      }
+    default:
+      return state;
   }
 }
