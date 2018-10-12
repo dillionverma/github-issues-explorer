@@ -1,5 +1,7 @@
+@import './variables';
+
 .App-header {
-  background-color: #ff6f00;
+  background-color: $color-primary;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -101,7 +103,7 @@
     display: flex;
     > li {
       font-size: 10px;
-      background: #ff6f00;
+      background: $color-primary;
       color: white;
       padding: 5px 10px;
       border-radius: 8px;
