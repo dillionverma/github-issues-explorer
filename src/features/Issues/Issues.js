@@ -6,8 +6,8 @@ import { getIssues, filterIssues } from "./actions";
 
 const maxLength = 50;
 
-const Card = ({ title, body, labels, url }) => (
-  <div className="card" onClick={this.issueUrl}>
+const Card = ({ title, body, labels }) => (
+  <div className="card">
     <div className="card-title">
       <h4>{title}</h4>
     </div>
@@ -58,7 +58,7 @@ class Issues extends Component {
   handleFilter = by => {
     this.props.filterIssues(by);
   };
-  
+
   issueUrl = (owner, repo, id) => {
     window.location.href = `https://github.com/${owner}/${repo}/issues/${id}`;
   };
