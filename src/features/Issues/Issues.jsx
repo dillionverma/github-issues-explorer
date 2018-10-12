@@ -96,11 +96,6 @@ class Issues extends Component {
 
         <div className="issues-filters">
           <ul>
-<<<<<<< HEAD:src/features/Issues/Issues.jsx
-            <li onClick={() => this.handleFilter('all')} className={filter === 'all' ? 'selected' : ''}>All issues</li>
-            <li onClick={() => this.handleFilter('open')} className={filter === 'open' ? 'selected' : ''}>Open issues</li>
-            <li onClick={() => this.handleFilter('closed')} className={filter === 'closed' ? 'selected' : ''}>Closed issues</li>
-=======
             <li
               onClick={() => this.handleFilter("all")}
               className={filter === "all" ? "selected" : ""}
@@ -125,7 +120,6 @@ class Issues extends Component {
             >
               Pull Requests
             </li>
->>>>>>> 673d01ef19189d144ae278beff9c6867ab86282c:src/features/Issues/Issues.js
           </ul>
         </div>
         <div className="issues-container">
