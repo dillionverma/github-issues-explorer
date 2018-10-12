@@ -45,7 +45,8 @@ export default function reducer(state = INITIAL_STATE, action) {
         return {
           ...state,
           filterBy: action.payload.by,
-          filteredIssues: Object.values(state.issues).filter(issue => issue.state === by)
+          filteredIssues: Object.values(state.issues)
+            .filter(issue => issue.state === by || !!issue.pull_request)
         }
       }
     default:
