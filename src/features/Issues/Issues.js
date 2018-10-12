@@ -6,7 +6,7 @@ import { getIssues, filterIssues } from "./actions";
 
 const maxLength = 50;
 
-const Card = ({ title, body, labels }) => (
+const Card = ({title, body, labels}) =>
   <div className="card">
     <div className="card-title">
       <h4>{title}</h4>
@@ -19,16 +19,15 @@ const Card = ({ title, body, labels }) => (
         <div>
           <div className="card-labels">
             <ul>
-              {labels.map(label => (
-                <li key={label.id}>{label.name}</li>
-              ))}
+            {labels.map(label =>
+              <li key={label.id}>{label.name}</li>
+            )}
             </ul>
           </div>
         </div>
       )}
     </div>
   </div>
-);
 
 const githubUrl = (owner, repo) => `https://github.com/${owner}/${repo}/`;
 
@@ -37,9 +36,10 @@ class Issues extends Component {
     super(props);
     this.state = {
       issues: {},
-      owner: "",
-      repo: ""
-    };
+      owner: '',
+      repo: '',
+      filter: 'all',
+    }
   }
 
   componentDidMount() {
@@ -56,15 +56,16 @@ class Issues extends Component {
   }
 
   handleFilter = by => {
-    this.props.filterIssues(by);
-  };
+    this.props.filterIssues(by)
+    this.setState({ filter: by });
+  }
 
   issueUrl = (owner, repo, id) => {
     window.location.href = `https://github.com/${owner}/${repo}/issues/${id}`;
   };
 
   render() {
-    const { owner, repo, issues } = this.state;
+    const {owner, repo, issues, filter} = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -77,45 +78,25 @@ class Issues extends Component {
         </header>
         <div className="issues-filters">
           <ul>
-            <li
-              onClick={() => {
-                this.handleFilter("all");
-              }}
-            >
-              All issues
-            </li>
-            <li
-              onClick={() => {
-                this.handleFilter("open");
-              }}
-            >
-              Open issues
-            </li>
-            <li
-              onClick={() => {
-                this.handleFilter("closed");
-              }}
-            >
-              Closed issues
-            </li>
+            <li onClick={() => {this.handleFilter('all')}} className={(filter === 'all' ? 'selected' : '')}>All issues</li>
+            <li onClick={() => {this.handleFilter('open')}} className={(filter === 'open' ? 'selected' : '')}>Open issues</li>
+            <li onClick={() => {this.handleFilter('closed')}} className={(filter === 'closed' ? 'selected' : '')}>Closed issues</li>
           </ul>
         </div>
         <div className="issues-container">
-          {Object.entries(issues).map(([id, issue]) => (
+          {Object.entries(issues).map(([id, issue]) =>
             <div
-              onClick={() => {
-                this.issueUrl(owner, repo, issue.number);
-              }}
-            >
-              <Card
-                key={issue.id}
-                title={issue.title}
-                body={issue.body}
-                labels={issue.labels}
-                issueUrl={this.issueUrl}
-              />
-            </div>
-          ))}
+            onClick={() => {
+              this.issueUrl(owner, repo, issue.number);
+            }}>
+          <Card
+            key={issue.id}
+            title={issue.title}
+            body={issue.body}
+            labels={issue.labels}
+            />
+          </div>
+          )}
         </div>
       </div>
     );
