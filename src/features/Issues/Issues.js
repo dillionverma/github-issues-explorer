@@ -3,13 +3,18 @@ import './Issues.scss';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { getIssues, filterIssues } from './actions';
+import Octicon, { getIconByName } from '@githubprimer/octicons-react';
 
 const maxLength = 50;
 
-const Card = ({ title, body, labels, issueUrl, owner, repo, number }) => (
+const Card = ({ title, body, labels, issueUrl, owner, repo, number, state }) => (
   <div className="card" onClick={() => issueUrl(owner, repo, number)}>
     <div className="card-title">
-      <h4>{title}</h4>
+      <Octicon
+        className={"card-icon"}
+        icon={getIconByName(`issue-${state == "open" ? "opened" : "closed"}`)}
+      />
+        <h4 className={"card-title-text"}>{title}</h4>
     </div>
     <div className="card-body">
       <div>
@@ -104,6 +109,7 @@ class Issues extends Component {
               owner={owner}
               repo={repo}
               number={issue.number}
+              state={issue.state}
             />
           ))}
         </div>
