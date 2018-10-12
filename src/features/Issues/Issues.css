@@ -70,6 +70,7 @@
   transition:0.3s;
 	box-shadow:#e9e9e9 0px 5px 5px 0px;
   min-width: 300px;
+  text-decoration: none;
 }
 
 .issues-container .card-title {
