@@ -49,6 +49,9 @@ $breakpoint-tablet: 768px;
     padding: 15px;
     margin: 0px;
     display: flex;
+    @media (max-width: $breakpoint-tablet) {
+      justify-content: center;
+    }
     > li {
       padding: 5px 10px;
       font-weight: 200;
