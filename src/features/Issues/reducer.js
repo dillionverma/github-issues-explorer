@@ -41,7 +41,17 @@ export default function reducer(state = INITIAL_STATE, action) {
           filterBy: action.payload.by,
           filteredIssues: state.issues
         }
-      } else {
+      } else if (by === "pull_request") {
+         return {
+            ...state,
+            filterBy: by,
+            filteredIssues: Object.values(state.issues).filter(
+              issue => issue.pull_request
+            )
+          };
+      }
+      
+      else {
         return {
           ...state,
           filterBy: action.payload.by,

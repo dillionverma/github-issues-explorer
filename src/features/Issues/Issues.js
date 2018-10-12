@@ -110,6 +110,12 @@ class Issues extends Component {
             >
               Closed issues
             </li>
+            <li
+              onClick={() => this.handleFilter("pull_request")}
+              className={filter === "pull_request" ? "selected" : ""}
+            >
+              Pull requests
+            </li>
           </ul>
         </div>
         <div className="issues-container">

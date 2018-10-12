@@ -9,11 +9,11 @@ import axios from 'axios';
 import config from '../../config';
 
 export const filterIssues = by => {
-  console.log(by)
+  console.log('filter by', by)
   return dispatch => dispatch({
     type: FILTER_ISSUES,
     payload: {
-      by: by,
+      by,
     }
   })
 }
