@@ -6,27 +6,29 @@ import { getIssues, filterIssues } from './actions';
 
 const maxLength = 50;
 
-const Card = ({title, body, labels}) =>
+const Card = ({title, body, labels, url}) =>
   <div className="card">
-    <div className="card-title">
-      <h4>{title}</h4>
-    </div>
-    <div className="card-body">
-      <div>
-        <p>{body && body.substring(0,maxLength)}</p>
+    <a href={url} target="_blank">
+      <div className="card-title">
+        <h4>{title}</h4>
       </div>
-      {labels &&
+      <div className="card-body">
         <div>
-          <div className="card-labels">
-            <ul>
-            {labels.map(label =>
-              <li key={label.id}>{label.name}</li>
-            )}
-            </ul>
-          </div>
+          <p>{body && body.substring(0,maxLength)}</p>
         </div>
-      }
-    </div>
+        {labels &&
+          <div>
+            <div className="card-labels">
+              <ul>
+              {labels.map(label =>
+                <li key={label.id}>{label.name}</li>
+              )}
+              </ul>
+            </div>
+          </div>
+        }
+      </div>
+    </a>
   </div>
 
 
@@ -84,6 +86,7 @@ class Issues extends Component {
             title={issue.title}
             body={issue.body}
             labels={issue.labels}
+            url={issue.html_url}
             />
           )}
         </div>
