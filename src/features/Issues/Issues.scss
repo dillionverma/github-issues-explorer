@@ -55,19 +55,11 @@
   padding: 0 3%;
   .card {
     display: block;
-<<<<<<< HEAD
     flex: 1 1 100%;
     margin: 0 1.56% 1.56% 1.56%;
     transition:0.3s;
     box-shadow:#e9e9e9 0px 5px 5px 0px;
     min-width: 100%;
-=======
-    flex: 1 1 300px;
-    margin: 0 30px 30px 30px;
-    transition:0.3s;
-    box-shadow:#e9e9e9 0px 5px 5px 0px;
-    min-width: 300px;
->>>>>>> 2d7466a083c6be8b44af85a36ffe9ead664273a7
     &:hover {
       box-shadow:#e9e9e9 0px 20px 20px 0px;
       transform:translatey(-20px);
