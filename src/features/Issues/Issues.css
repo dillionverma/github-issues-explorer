@@ -105,3 +105,10 @@
   cursor:pointer;
 
 }
+
+/* ADDED BY alexmeji */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
