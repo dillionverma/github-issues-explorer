@@ -3,25 +3,26 @@ import './Issues.css';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { getIssues, filterIssues } from './actions';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 
 const maxLength = 50;
 
-const Card = ({title, body, labels}) =>
+const Card = ({ title, body, labels }) =>
   <div className="card">
     <div className="card-title">
       <h4>{title}</h4>
     </div>
     <div className="card-body">
       <div>
-        <p>{body && body.substring(0,maxLength)}</p>
+        <p>{body && body.substring(0, maxLength)}</p>
       </div>
       {labels &&
         <div>
           <div className="card-labels">
             <ul>
-            {labels.map(label =>
-              <li key={label.id}>{label.name}</li>
-            )}
+              {labels.map(label =>
+                <li key={label.id}>{label.name}</li>
+              )}
             </ul>
           </div>
         </div>
@@ -48,8 +49,8 @@ class Issues extends Component {
     let a = this.props.location.pathname.split('/')
     const owner = a[1];
     const repo = a[2];
-    this.setState({owner, repo})
-    this.props.getIssues({owner, repo});
+    this.setState({ owner, repo })
+    this.props.getIssues({ owner, repo });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -63,7 +64,11 @@ class Issues extends Component {
   }
 
   render() {
-    const {owner, repo, issues, filter} = this.state;
+    const { owner, repo, issues, filter } = this.state;
+    const { isLoading } = this.props
+
+    if (isLoading) return <LoadingSpinner />
+
     return (
       <div className="App">
         <header className="App-header">
@@ -72,18 +77,18 @@ class Issues extends Component {
         </header>
         <div className="issues-filters">
           <ul>
-            <li onClick={() => {this.handleFilter('all')}} className={(filter === 'all' ? 'selected' : '')}>All issues</li>
-            <li onClick={() => {this.handleFilter('open')}} className={(filter === 'open' ? 'selected' : '')}>Open issues</li>
-            <li onClick={() => {this.handleFilter('closed')}} className={(filter === 'closed' ? 'selected' : '')}>Closed issues</li>
+            <li onClick={() => { this.handleFilter('all') }} className={(filter === 'all' ? 'selected' : '')}>All issues</li>
+            <li onClick={() => { this.handleFilter('open') }} className={(filter === 'open' ? 'selected' : '')}>Open issues</li>
+            <li onClick={() => { this.handleFilter('closed') }} className={(filter === 'closed' ? 'selected' : '')}>Closed issues</li>
           </ul>
         </div>
         <div className="issues-container">
           {Object.entries(issues).map(([id, issue]) =>
-          <Card
-            key={issue.id}
-            title={issue.title}
-            body={issue.body}
-            labels={issue.labels}
+            <Card
+              key={issue.id}
+              title={issue.title}
+              body={issue.body}
+              labels={issue.labels}
             />
           )}
         </div>
