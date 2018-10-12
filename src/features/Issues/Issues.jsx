@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './Issues.scss';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getIssues, filterIssues } from './actions';
 
 const maxLength = 50;
 
-const Card = ({ title, body, labels, issueUrl, owner, repo, number }) => (
+const Card = ({
+  title, body, labels, issueUrl, owner, repo, number,
+}) => (
   <div className="card" onClick={() => issueUrl(owner, repo, number)}>
     <div className="card-title">
       <h4>{title}</h4>
@@ -37,15 +39,15 @@ class Issues extends Component {
     super(props);
     this.state = {
       issues: {},
-      owner: "",
-      repo: "",
-      filter: "all",
-      page: 1 // By default, page always start at 1
+      owner: '',
+      repo: '',
+      filter: 'all',
+      page: 1, // By default, page always start at 1
     };
   }
 
   componentDidMount() {
-    let a = this.props.location.pathname.split("/");
+    const a = this.props.location.pathname.split('/');
     const owner = a[1];
     const repo = a[2];
     this.setState({ owner, repo });
@@ -57,7 +59,7 @@ class Issues extends Component {
     console.log(nextProps.filteredIssues);
   }
 
-  handleFilter = by => {
+  handleFilter = (by) => {
     this.props.filterIssues(by);
     this.setState({ filter: by });
   };
@@ -66,16 +68,18 @@ class Issues extends Component {
     window.location.href = `https://github.com/${owner}/${repo}/issues/${id}`;
   };
 
-  handlePageChange = number => {
+  handlePageChange = (number) => {
     const { owner, repo, page } = this.state;
-    let newPage = page + number;
+    const newPage = page + number;
 
     this.props.getIssues({ owner, repo, page: newPage });
     this.setState({ page: newPage });
   };
 
   render() {
-    const { owner, repo, issues, filter } = this.state;
+    const {
+      owner, repo, issues, filter,
+    } = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -88,9 +92,9 @@ class Issues extends Component {
         </header>
         <div className="issues-filters">
           <ul>
-            <li onClick={() => this.handleFilter("all")} className={filter === "all" ? "selected" : ""}>All issues</li>
-            <li onClick={() => this.handleFilter("open")} className={filter === "open" ? "selected" : ""}>Open issues</li>
-            <li onClick={() => this.handleFilter("closed")} className={filter === "closed" ? "selected" : ""}>Closed issues</li>
+            <li onClick={() => this.handleFilter('all')} className={filter === 'all' ? 'selected' : ''}>All issues</li>
+            <li onClick={() => this.handleFilter('open')} className={filter === 'open' ? 'selected' : ''}>Open issues</li>
+            <li onClick={() => this.handleFilter('closed')} className={filter === 'closed' ? 'selected' : ''}>Closed issues</li>
           </ul>
         </div>
         <div className="issues-container">
@@ -117,7 +121,7 @@ class Issues extends Component {
             </button>
           )}
           <span className="page-number">{this.state.page}</span>
-          {/* Since GitHub sends 30 issues per page, 
+          {/* Since GitHub sends 30 issues per page,
               there is no more requests if there are not exactly 30 requests */}
           {Object.keys(this.state.issues).length === 30 && (
             <button
@@ -136,15 +140,15 @@ class Issues extends Component {
 const mapStateToProps = state => ({
   filteredIssues: state.issues.filteredIssues,
   fetched: state.issues.fetched,
-  isLoading: state.issues.isLoading
+  isLoading: state.issues.isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
   getIssues: url => dispatch(getIssues(url)),
-  filterIssues: state => dispatch(filterIssues(state))
+  filterIssues: state => dispatch(filterIssues(state)),
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Issues);
