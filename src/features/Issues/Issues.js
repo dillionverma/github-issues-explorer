@@ -6,8 +6,8 @@ import { getIssues, filterIssues } from "./actions";
 
 const maxLength = 50;
 
-const Card = ({title, body, labels}) =>
-  <div className="card">
+const Card = ({title, body, labels, issueUrl, owner, repo, number}) =>
+<div className="card" onClick={() => issueUrl(owner, repo, number)}>
     <div className="card-title">
       <h4>{title}</h4>
     </div>
@@ -85,17 +85,16 @@ class Issues extends Component {
         </div>
         <div className="issues-container">
           {Object.entries(issues).map(([id, issue]) =>
-            <div
-            onClick={() => {
-              this.issueUrl(owner, repo, issue.number);
-            }}>
           <Card
             key={issue.id}
             title={issue.title}
             body={issue.body}
             labels={issue.labels}
+            issueUrl={this.issueUrl}
+            owner={owner}
+            repo={repo}
+            number={issue.number}
             />
-          </div>
           )}
         </div>
       </div>
