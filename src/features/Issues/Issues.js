@@ -3,13 +3,26 @@ import './Issues.scss';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { getIssues, filterIssues } from './actions';
+import Octicon, { iconsByName } from '@githubprimer/octicons-react'
 
 const maxLength = 50;
 
-const Card = ({ title, body, labels, issueUrl, owner, repo, number }) => (
-  <div className="card" onClick={() => issueUrl(owner, repo, number)}>
+const Card = ({title, body, labels, issueUrl, owner, repo, number, closed}) =>
+<div className="card" onClick={() => issueUrl(owner, repo, number)}>
     <div className="card-title">
       <h4>{title}</h4>
+      <span className={`card-status-icon ${closed ? 'closed' : 'open'}`}>
+        {closed ?
+          <Octicon
+          icon={iconsByName["issue-closed"]}
+          size="24"
+          /> :
+          <Octicon
+          icon={iconsByName["issue-opened"]}
+          size="24"
+          />
+        }
+      </span>
     </div>
     <div className="card-body">
       <div>
@@ -94,16 +107,17 @@ class Issues extends Component {
           </ul>
         </div>
         <div className="issues-container">
-          {Object.entries(issues).map(([id, issue]) => (
-            <Card
-              key={issue.id}
-              title={issue.title}
-              body={issue.body}
-              labels={issue.labels}
-              issueUrl={this.issueUrl}
-              owner={owner}
-              repo={repo}
-              number={issue.number}
+          {Object.entries(issues).map(([id, issue]) =>
+          <Card
+            key={issue.id}
+            title={issue.title}
+            body={issue.body}
+            labels={issue.labels}
+            issueUrl={this.issueUrl}
+            owner={owner}
+            repo={repo}
+            number={issue.number}
+            closed={issue.closed_at ? true : false}
             />
           ))}
         </div>
