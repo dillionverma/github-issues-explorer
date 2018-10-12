@@ -1,5 +1,7 @@
+@import './variables';
+
 .landing {
-  background-color: #ff6f00;
+  background-color: $color-primary;
   display: flex;
   flex-direction: column;
   justify-content: center;
