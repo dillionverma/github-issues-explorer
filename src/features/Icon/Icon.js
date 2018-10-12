@@ -1,4 +1,5 @@
 import React from "react";
+import "./Icon.scss";
 import Octicon, { getIconByName } from "@githubprimer/octicons-react";
 
 const Icon = ({ state, pull }) => {
