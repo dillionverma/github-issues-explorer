@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getIssues, filterIssues } from "./actions";
 import Icon from "../Icon/Icon";
+import styled from "styled-components";
 
 const maxLength = 50;
 
@@ -22,7 +23,9 @@ const Card = ({ title, body, labels, issueUrl, owner, repo, number, state,  pull
           <div className="card-labels">
             <ul>
               {labels.map(label => (
-                <li key={label.id}>{label.name}</li>
+               <StyledLi key={label.id} color={label.color}>
+                  {label.name}
+                </StyledLi>
               ))}
             </ul>
           </div>
@@ -177,3 +180,11 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Issues);
+
+
+const StyledLi = styled.li`
+background-color: #${props => props.color};
+color: white;
+padding: .5em;
+border-radius: 5px;
+`;
