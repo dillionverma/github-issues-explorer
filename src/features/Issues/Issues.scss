@@ -131,16 +131,9 @@ button#return-button a {
   }
   .card-labels > ul {
     list-style-type: none;
-    padding: 15px;
-    margin: 0px;
+    padding: 0;
+    margin: 0 auto;
     display: flex;
-    > li {
-      font-size: 10px;
-      background: $color-primary;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 8px;
-    }
   }
 }
 
