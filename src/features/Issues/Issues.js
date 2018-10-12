@@ -3,7 +3,7 @@ import "./Issues.scss";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getIssues, filterIssues } from "./actions";
-import Icon from "../Icon/Icon";
+import Icon from "./components/Icon/Icon";
 
 const maxLength = 50;
 
