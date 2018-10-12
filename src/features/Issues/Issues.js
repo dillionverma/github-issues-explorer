@@ -6,8 +6,8 @@ import { getIssues, filterIssues } from './actions';
 
 const maxLength = 50;
 
-const Card = ({title, body, labels}) =>
-  <div className="card">
+const Card = ({title, body, labels, htmlUrl}) =>
+  <a target="_blank" href={htmlUrl} className="card">
     <div className="card-title">
       <h4>{title}</h4>
     </div>
@@ -27,7 +27,7 @@ const Card = ({title, body, labels}) =>
         </div>
       }
     </div>
-  </div>
+  </a>
 
 
 const githubUrl = (owner, repo) => `https://github.com/${owner}/${repo}/`;
@@ -84,6 +84,7 @@ class Issues extends Component {
             title={issue.title}
             body={issue.body}
             labels={issue.labels}
+            htmlUrl={issue.html_url}
             />
           )}
         </div>
