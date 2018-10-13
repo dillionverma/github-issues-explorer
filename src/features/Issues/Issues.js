@@ -3,6 +3,7 @@ import "./Issues.scss";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getIssues, filterIssues } from "./actions";
+import Loader from '../../common/Loader';
 
 const maxLength = 50;
 
@@ -77,77 +78,85 @@ class Issues extends Component {
   render() {
     const { owner, repo, issues, filter } = this.state;
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">
-            <Link to="/">Github Issue Viewer</Link>
-          </h1>
-          <h4 className="App-url">
-            <a href={githubUrl(owner, repo)}>{githubUrl(owner, repo)}</a>
-          </h4>
-          <button id="return-button">
-            <Link to="/">Go back</Link>
-          </button>
-        </header>
-
-        <div className="issues-filters">
-          <ul>
-            <li
-              onClick={() => this.handleFilter("all")}
-              className={filter === "all" ? "selected" : ""}
-            >
-              All issues
-            </li>
-            <li
-              onClick={() => this.handleFilter("open")}
-              className={filter === "open" ? "selected" : ""}
-            >
-              Open issues
-            </li>
-            <li
-              onClick={() => this.handleFilter("closed")}
-              className={filter === "closed" ? "selected" : ""}
-            >
-              Closed issues
-            </li>
-          </ul>
-        </div>
-        <div className="issues-container">
-          {Object.entries(issues).map(([id, issue]) => (
-            <Card
-              key={issue.id}
-              title={issue.title}
-              body={issue.body}
-              labels={issue.labels}
-              issueUrl={this.issueUrl}
-              owner={owner}
-              repo={repo}
-              number={issue.number}
-            />
-          ))}
-        </div>
-        <div className="paginator">
-          {this.state.page > 1 && (
-            <button
-              className="paginator-button"
-              onClick={() => this.handlePageChange(-1)}
-            >
-              <i className="material-icons">arrow_back_ios</i>
+      <React.Fragment>
+      {
+        this.props.isLoading
+        ? <Loader />
+        : (
+          <div className="App">
+          <header className="App-header">
+            <h1 className="App-title">
+              <Link to="/">Github Issue Viewer</Link>
+            </h1>
+            <h4 className="App-url">
+              <a href={githubUrl(owner, repo)}>{githubUrl(owner, repo)}</a>
+            </h4>
+            <button id="return-button">
+              <Link to="/">Go back</Link>
             </button>
-          )}
-          <span className="page-number">{this.state.page}</span>
-          {/* Since GitHub sends 30 issues per page, 
-              there is no more requests if there are not exactly 30 requests */}
-          {Object.keys(this.state.issues).length === 30 && (
-            <button
-              className="paginator-button"
-              onClick={() => this.handlePageChange(1)}
-            >
-              <i className="material-icons">arrow_forward_ios</i>
-            </button>
-          )}
+          </header>
+  
+          <div className="issues-filters">
+            <ul>
+              <li
+                onClick={() => this.handleFilter("all")}
+                className={filter === "all" ? "selected" : ""}
+              >
+                All issues
+              </li>
+              <li
+                onClick={() => this.handleFilter("open")}
+                className={filter === "open" ? "selected" : ""}
+              >
+                Open issues
+              </li>
+              <li
+                onClick={() => this.handleFilter("closed")}
+                className={filter === "closed" ? "selected" : ""}
+              >
+                Closed issues
+              </li>
+            </ul>
+          </div>
+          <div className="issues-container">
+            {Object.entries(issues).map(([id, issue]) => (
+              <Card
+                key={issue.id}
+                title={issue.title}
+                body={issue.body}
+                labels={issue.labels}
+                issueUrl={this.issueUrl}
+                owner={owner}
+                repo={repo}
+                number={issue.number}
+              />
+            ))}
+          </div>
+          <div className="paginator">
+            {this.state.page > 1 && (
+              <button
+                className="paginator-button"
+                onClick={() => this.handlePageChange(-1)}
+              >
+                <i className="material-icons">arrow_back_ios</i>
+              </button>
+            )}
+            <span className="page-number">{this.state.page}</span>
+            {/* Since GitHub sends 30 issues per page, 
+                there is no more requests if there are not exactly 30 requests */}
+            {Object.keys(this.state.issues).length === 30 && (
+              <button
+                className="paginator-button"
+                onClick={() => this.handlePageChange(1)}
+              >
+                <i className="material-icons">arrow_forward_ios</i>
+              </button>
+            )}
+          </div>
         </div>
-      </div>
+        )
+      }
+      </React.Fragment>  
     );
   }
 }
