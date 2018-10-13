@@ -6,6 +6,7 @@ import { getIssues, filterIssues } from "./actions";
 import Icon from "./components/Icon/Icon";
 import styled from "styled-components";
 
+
 const maxLength = 50;
 
 const Card = ({ title, body, labels, issueUrl, owner, repo, number, state,  pull_request }) => (
