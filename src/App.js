@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import './App.css';
-import { Route } from "react-router-dom";
+import './App.scss';
+import { Route } from 'react-router-dom';
 import Landing from './features/Issues/Landing';
 import Issues from './features/Issues/Issues';
 
 
 class App extends Component {
-
   render() {
     return (
       <div className="App">
