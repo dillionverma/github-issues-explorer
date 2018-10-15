@@ -5,14 +5,15 @@ import { connect } from "react-redux";
 import { getIssues, filterIssues } from "./actions";
 import Icon from "./components/Icon/Icon";
 import styled from "styled-components";
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 
 const maxLength = 50;
 
-const Card = ({ title, body, labels, issueUrl, owner, repo, number, state,  pull_request }) => (
+const Card = ({ title, body, labels, issueUrl, owner, repo, number, state, pull_request }) => (
   <div className="card" onClick={() => issueUrl(owner, repo, number)}>
     <div className="card-title">
-		<Icon state={state} pull={pull_request} />
-        <h4 className={"card-title-text"}>{title}</h4>
+      <Icon state={state} pull={pull_request} />
+      <h4 className={"card-title-text"}>{title}</h4>
     </div>
     <div className="card-body">
       <div>
@@ -23,7 +24,7 @@ const Card = ({ title, body, labels, issueUrl, owner, repo, number, state,  pull
           <div className="card-labels">
             <ul>
               {labels.map(label => (
-               <StyledLi key={label.id} color={label.color}>
+                <StyledLi key={label.id} color={label.color}>
                   {label.name}
                 </StyledLi>
               ))}
@@ -83,6 +84,10 @@ class Issues extends Component {
     const {
       owner, repo, issues, filter,
     } = this.state;
+    const { isLoading } = this.props
+
+    if (isLoading) return <LoadingSpinner />
+
     return (
       <div className="App">
         <header className="App-header">
