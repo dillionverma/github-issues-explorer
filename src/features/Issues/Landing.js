@@ -25,20 +25,22 @@ class Landing extends Component {
 
   render() {
     return (
-      <div className="landing">
-        <h1 className="landing-title"> Github Issues Viewer</h1>
-        <div className="search-bar">
-          <form onSubmit={this.handleSubmit}>
-            <i className="material-icons search-icon noUserSelect">search</i>
-            <input
-              type="url"
-              name="url"
-              value={this.state.url}
-              id="search-input"
-              placeholder="Paste a link to a Github repo!"
-              onChange={this.handleChange}
-            />
-          </form>
+      <div className="page">
+        <div className="landing">
+          <h1 className="landing-title"> Github Issues Viewer</h1>
+          <div className="search-bar">
+            <form onSubmit={this.handleSubmit}>
+              <i className="material-icons search-icon noUserSelect">search</i>
+              <input
+                type="url"
+                name="url"
+                value={this.state.url}
+                id="search-input"
+                placeholder="Paste a link to a Github repo!"
+                onChange={this.handleChange}
+              />
+            </form>
+          </div>
         </div>
       </div>
     );

@@ -6,13 +6,22 @@
   }
 }
 
+.loading {
+  position: fixed;
+  display: grid;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-items: center;
+}
 .loading-spinner {
   height: 40px;
   margin: 100px auto;
   position: relative;
   width: 40px;
 }
-
 .loading-spinner__bounce {
   background-color: #ff6f00;
   border-radius: 50%;
@@ -25,7 +34,6 @@
 
   animation: bounce 2s infinite ease-in-out;
 }
-
 .loading-spinner__bounce.loading-spinner__bounce--two {
   animation-delay: -1s;
 }
