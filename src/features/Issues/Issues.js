@@ -87,9 +87,9 @@ class Issues extends Component {
     const { isLoading } = this.props
 
     if (isLoading) return <LoadingSpinner />
-
+    
     return (
-      <div className="App">
+      <div className="page">
         <header className="App-header">
           <h1 className="App-title">
             <Link to="/">Github Issue Viewer</Link>
